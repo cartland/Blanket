@@ -8,19 +8,14 @@ Our navigation is state-driven. The UI is a direct function of a list of keys re
 
 #### 1. Defining Navigation Keys
 
-All navigation destinations are represented by a key that implements the `NavKey` interface.
+Any `@Serializable` object can serve as a navigation key. There is no need to implement a shared base interface, as the Navigation 3 library can use any serializable type. This allows each feature module to define its own keys independently.
 
-* **Requirement:** All keys must be annotated with `@Serializable` and implement `com.blanket.core.navigation.NavKey`.
-* **Architecture Note:** `NavKey` is a regular `interface`, not a `sealed interface`. This is a deliberate choice to allow feature modules to define their own navigation keys independently, which is not possible with a `sealed` type.
-* **Implementation:** Keys should be a `data object` for screens without parameters or a `data class` for screens that require arguments.
+*   **Requirement:** All keys must be annotated with `@Serializable`.
+*   **Implementation:** Keys should be a `data object` for screens without parameters or a `data class` for screens that require arguments.
 
 **Example:**
 
 ```kotlin
-// in :core:navigation
-@Serializable
-interface NavKey
-
 // in :feature:home:api
 @Serializable
 data object HomeKey : NavKey
@@ -34,9 +29,10 @@ data class ProductDetailKey(val productId: String) : NavKey
 
 The back stack's state should be created and managed at the Composable level.
 
-* **Requirement:** Use the `@Composable fun rememberNavBackStack()` function to create the back stack instance.
+*   **Requirement:** Use the `@Composable fun rememberNavBackStack()` function to create the back stack instance.
 
 **Example:**
+
 ```kotlin
 @Composable
 fun AppNavigation() {
@@ -49,10 +45,11 @@ fun AppNavigation() {
 
 To resolve a navigation key to its corresponding screen Composable, we use a `when` expression inside the `entryProvider`.
 
-* **Requirement:** The `entryProvider` lambda for the `NavDisplay` **must** be implemented using a `when` expression.
-* **Important:** Because `NavKey` is a regular interface, the compiler cannot guarantee that the `when` statement is exhaustive. You **must** include an `else` branch to handle unknown keys gracefully, for example by logging an error or displaying a "Not Found" screen. This prevents crashes if a key from a module is not yet handled in the main `composeApp`.
+*   **Requirement:** The `entryProvider` lambda for the `NavDisplay` **must** be implemented using a `when` expression on the key.
+*   **Important:** You **must** include an `else` branch to handle unknown keys gracefully, for example by logging an error or displaying a "Not Found" screen. This prevents crashes if a key from a module is not yet handled in the main `composeApp`.
 
 **Example:**
+
 ```kotlin
 NavDisplay(
     backStack = backStack,

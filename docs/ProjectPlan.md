@@ -42,7 +42,6 @@ The first phase focuses on creating the new module structure and configuring dep
 This phase involves building the foundational layers of the application.
 
 1.  **`:core:navigation`**:
-    *   [ ] Define the `interface NavKey` in `commonMain`.
     *   [ ] Define the `expect interface Navigator` for triggering navigation events from ViewModels.
 
 2.  **`:core:network`**:
@@ -82,7 +81,7 @@ With the core modules in place, the main application modules can be updated to u
 This phase serves as a template for all future feature development.
 
 1.  **`:feature:home:api`**:
-    *   [ ] Define the `data object HomeKey : NavKey`.
+    *   [ ] Define the `@Serializable data object HomeKey`.
     *   [ ] (Optional) Define an interface for the public-facing feature Composable, e.g., `interface HomeEntry`.
 
 2.  **`:feature:home:impl`**:
