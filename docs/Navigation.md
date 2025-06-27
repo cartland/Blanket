@@ -8,19 +8,24 @@ Our navigation is state-driven. The UI is a direct function of a list of keys re
 
 #### 1. Defining Navigation Keys
 
-All navigation destinations must be represented by a key that implements our sealed `NavKey` interface. This provides compile-time safety.
+All navigation destinations are represented by a key that implements the `NavKey` interface.
 
 * **Requirement:** All keys must be annotated with `@Serializable` and implement `com.blanket.core.navigation.NavKey`.
-* **Implementation:** Keys should be `data object` for screens without parameters or `data class` for screens that require arguments.
+* **Architecture Note:** `NavKey` is a regular `interface`, not a `sealed interface`. This is a deliberate choice to allow feature modules to define their own navigation keys independently, which is not possible with a `sealed` type.
+* **Implementation:** Keys should be a `data object` for screens without parameters or a `data class` for screens that require arguments.
 
 **Example:**
-```kotlin
-@Serializable
-sealed interface NavKey
 
+```kotlin
+// in :core:navigation
+@Serializable
+interface NavKey
+
+// in :feature:home:api
 @Serializable
 data object HomeKey : NavKey
 
+// in :feature:products:api
 @Serializable
 data class ProductDetailKey(val productId: String) : NavKey
 ```
@@ -42,9 +47,10 @@ fun AppNavigation() {
 
 #### 3. Resolving Keys to Screens
 
-To prevent runtime errors from unhandled navigation keys, we will use a pattern that provides compile-time safety.
+To resolve a navigation key to its corresponding screen Composable, we use a `when` expression inside the `entryProvider`.
 
-* **Requirement:** The `entryProvider` lambda for the `NavDisplay` **must** be implemented using an exhaustive `when` expression. The Kotlin compiler will force every subtype of `NavKey` to be handled, preventing bugs when new screens are added.
+* **Requirement:** The `entryProvider` lambda for the `NavDisplay` **must** be implemented using a `when` expression.
+* **Important:** Because `NavKey` is a regular interface, the compiler cannot guarantee that the `when` statement is exhaustive. You **must** include an `else` branch to handle unknown keys gracefully, for example by logging an error or displaying a "Not Found" screen. This prevents crashes if a key from a module is not yet handled in the main `composeApp`.
 
 **Example:**
 ```kotlin
@@ -54,6 +60,7 @@ NavDisplay(
         when (key) {
             is HomeKey -> NavEntry(key) { HomeScreen() }
             is ProductDetailKey -> NavEntry(key) { ProductDetailScreen(key) }
+            else -> NavEntry(key) { UnknownScreen(key) } // Handle unknown keys
         }
     },
     // ...
