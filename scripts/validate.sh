@@ -1,5 +1,4 @@
 #!/bin/bash
 set -ex
 
-./gradlew build
-./gradlew check
+./gradlew clean build check test
