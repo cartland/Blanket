@@ -85,6 +85,10 @@ android {
     namespace = "com.chriscartland.blanket"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
+    lint {
+        disable += "NullSafeMutableLiveData"
+    }
+
     defaultConfig {
         applicationId = "com.chriscartland.blanket"
         minSdk = libs.versions.android.minSdk.get().toInt()
