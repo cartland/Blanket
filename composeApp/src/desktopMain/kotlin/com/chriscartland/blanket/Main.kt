@@ -3,11 +3,12 @@ package com.chriscartland.blanket
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 
-fun main() = application {
-    Window(
-        onCloseRequest = ::exitApplication,
-        title = "Blanket",
-    ) {
-        App()
+fun main() =
+    application {
+        Window(
+            onCloseRequest = ::exitApplication,
+            title = "Blanket",
+        ) {
+            App()
+        }
     }
-}
