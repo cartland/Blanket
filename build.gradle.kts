@@ -11,17 +11,19 @@ plugins {
     alias(libs.plugins.spotless) apply false
 }
 
-spotless {
-    kotlin {
-        target("**/*.kt")
-        targetExclude("**/build/**")
-        ktlint()
+subprojects {
+    apply(plugin = "com.diffplug.spotless")
+    configure<com.diffplug.gradle.spotless.SpotlessExtension> {
+
+        kotlin {
+            target("**/*.kt")
+            targetExclude("**/build/**")
+            ktlint()
+        }
+        kotlinGradle {
+            target("**/*.kts")
+            targetExclude("**/build/**")
+            ktlint()
+        }
     }
-    kotlinGradle {
-        target("**/*.kts")
-        targetExclude("**/build/**")
-        ktlint()
-    }
-}
-    alias(libs.plugins.spotless) apply false
 }
