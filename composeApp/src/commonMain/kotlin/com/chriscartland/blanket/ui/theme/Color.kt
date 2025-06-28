@@ -1,4 +1,4 @@
-package com.example.compose
+package com.chriscartland.blanket.ui.theme
 import androidx.compose.ui.graphics.Color
 
 val primaryLight = Color(0xFF445E91)
@@ -216,10 +216,3 @@ val surfaceContainerLowDarkHighContrast = Color(0xFF1E1F25)
 val surfaceContainerDarkHighContrast = Color(0xFF2F3036)
 val surfaceContainerHighDarkHighContrast = Color(0xFF3A3B41)
 val surfaceContainerHighestDarkHighContrast = Color(0xFF45474C)
-
-
-
-
-
-
-
