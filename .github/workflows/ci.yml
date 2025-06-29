@@ -157,7 +157,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
       - name: Build Server
-        run: ./gradlew :server:buildFatJar
+        run: ./scripts/build-server.sh
       - name: Upload Server JAR
         uses: actions/upload-artifact@v4
         with:
