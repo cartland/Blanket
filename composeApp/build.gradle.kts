@@ -90,10 +90,6 @@ android {
             .get()
             .toInt()
 
-    lint {
-        disable += "NullSafeMutableLiveData"
-    }
-
     defaultConfig {
         applicationId = "com.chriscartland.blanket"
         minSdk =
@@ -120,6 +116,9 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+    }
+    lint {
+        disable += "NullSafeMutableLiveData"
     }
 }
 
