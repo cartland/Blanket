@@ -50,11 +50,12 @@ jobs:
             ${{ runner.os }}-gradle-
       - name: Build Android App
         run: ./gradlew :composeApp:assembleDebug
-      - name: Upload Android APK
+      - name: Upload Android APKs and AABs
         uses: actions/upload-artifact@v4
         with:
-          name: blanket-android-apk
-          path: composeApp/build/outputs/apk/release/composeApp-release.apk
+          name: blanket-android-builds
+          path: composeApp/build/outputs/**/*.apk
+          path: composeApp/build/outputs/**/*.aab
 
   build_ios:
     needs: lint_and_test
