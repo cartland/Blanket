@@ -1,6 +1,8 @@
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
+import org.jetbrains.kotlin.konan.target.HostManager
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidKotlinMultiplatformLibrary)
@@ -28,7 +30,9 @@ kotlin {
     iosSimulatorArm64()
 
     // Configure XCFramework generation
-    xcframework("shared") // This will create shared.xcframework
+    if (HostManager.hostIsMac) {
+        xcframework("shared") // This will create shared.xcframework
+    }
 
     jvm()
 
