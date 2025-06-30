@@ -51,11 +51,16 @@ cp "${IOS_ARM64_FRAMEWORK_PATH}/Info.plist" "${FAT_FRAMEWORK_DIR}/Info.plist"
 # A more robust solution might involve `xcodebuild -create-xcframework`,
 # but for a basic fat framework, copying from one arch (e.g., arm64) often works.
 echo "Copying Modules..."
-# Ensure Modules subdirectory exists in FAT_FRAMEWORK_DIR
-mkdir -p "${FAT_FRAMEWORK_DIR}/Modules"
-# Copy all contents of the source swiftmodule directory
-# This handles different file extensions like .swiftmodule, .swiftdoc, .abi.json etc.
-cp -R "${IOS_ARM64_FRAMEWORK_PATH}/Modules/${FRAMEWORK_NAME}.swiftmodule/"* "${FAT_FRAMEWORK_DIR}/Modules/"
+mkdir -p "${FAT_FRAMEWORK_DIR}/Modules" # Ensure target Modules directory exists
+
+# Conditionally copy the .swiftmodule directory if it exists
+SWIFTMODULE_DIR_SOURCE="${IOS_ARM64_FRAMEWORK_PATH}/Modules/${FRAMEWORK_NAME}.swiftmodule"
+if [ -d "${SWIFTMODULE_DIR_SOURCE}" ]; then
+    echo "Copying ${FRAMEWORK_NAME}.swiftmodule directory..."
+    cp -R "${SWIFTMODULE_DIR_SOURCE}" "${FAT_FRAMEWORK_DIR}/Modules/"
+else
+    echo "${FRAMEWORK_NAME}.swiftmodule directory not found at ${SWIFTMODULE_DIR_SOURCE}, skipping copy."
+fi
 
 # If a modulemap exists, copy it.
 if [ -f "${IOS_ARM64_FRAMEWORK_PATH}/Modules/module.modulemap" ]; then
