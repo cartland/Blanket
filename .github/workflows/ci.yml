@@ -83,7 +83,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: blanket-ios-framework
-          path: shared/build/bin/ios/debugFramework/
+          path: shared/build/ios/debugFramework/ # Corrected path for the fat framework
 
   build_desktop:
     needs: lint_and_test
