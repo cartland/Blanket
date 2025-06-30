@@ -1,8 +1,6 @@
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
-import org.jetbrains.kotlin.konan.target.HostManager
-
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidKotlinMultiplatformLibrary)
@@ -24,14 +22,21 @@ kotlin {
         }
     }
 
-    // Define iOS targets
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
-
-    // Configure XCFramework generation
-    if (HostManager.hostIsMac) {
-        xcframework("shared") // This will create shared.xcframework
+    // Define iOS targets and their framework binaries
+    iosX64 {
+        binaries.framework {
+            baseName = "shared"
+        }
+    }
+    iosArm64 {
+        binaries.framework {
+            baseName = "shared"
+        }
+    }
+    iosSimulatorArm64 {
+        binaries.framework {
+            baseName = "shared"
+        }
     }
 
     jvm()
