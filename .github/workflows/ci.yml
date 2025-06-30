@@ -79,11 +79,11 @@ jobs:
             ${{ runner.os }}-gradle-
       - name: Build iOS Framework
         run: ./scripts/build-ios.sh
-      - name: Upload iOS Framework
+      - name: Upload iOS Debug XCFramework
         uses: actions/upload-artifact@v4
         with:
-          name: blanket-ios-framework
-          path: shared/build/ios/debugFramework/ # Corrected path for the fat framework
+          name: blanket-ios-xcframework-debug
+          path: shared/build/XCFrameworks/debug/shared.xcframework
 
   build_desktop:
     needs: lint_and_test

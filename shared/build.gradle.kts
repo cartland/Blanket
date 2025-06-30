@@ -22,21 +22,13 @@ kotlin {
         }
     }
 
-    iosX64 {
-        binaries.framework {
-            baseName = "shared"
-        }
-    }
-    iosArm64 {
-        binaries.framework {
-            baseName = "shared"
-        }
-    }
-    iosSimulatorArm64 {
-        binaries.framework {
-            baseName = "shared"
-        }
-    }
+    // Define iOS targets
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
+
+    // Configure XCFramework generation
+    xcframework("shared") // This will create shared.xcframework
 
     jvm()
 
