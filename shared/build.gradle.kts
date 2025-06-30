@@ -22,9 +22,21 @@ kotlin {
         }
     }
 
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
+    iosX64 {
+        binaries.framework {
+            baseName = "shared"
+        }
+    }
+    iosArm64 {
+        binaries.framework {
+            baseName = "shared"
+        }
+    }
+    iosSimulatorArm64 {
+        binaries.framework {
+            baseName = "shared"
+        }
+    }
 
     jvm()
 
