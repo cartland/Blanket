@@ -38,7 +38,6 @@ mkdir -p "${FAT_FRAMEWORK_DIR}"
 echo "Creating fat binary with lipo..."
 lipo -create \
     "${IOS_ARM64_FRAMEWORK_PATH}/${FRAMEWORK_NAME}" \
-    "${IOS_SIMULATOR_ARM64_FRAMEWORK_PATH}/${FRAMEWORK_NAME}" \
     "${IOS_X64_FRAMEWORK_PATH}/${FRAMEWORK_NAME}" \
     -output "${FAT_FRAMEWORK_DIR}/${FRAMEWORK_NAME}"
 
