@@ -1,2 +1,5 @@
 #!/bin/bash
-./scripts/build-ios-framework.sh "Debug" "x86_64 arm64" "shared/build/bin/ios/debugFramework" "shared"
+set -ex
+
+# Builds the debug iOS framework for the shared module.
+./gradlew :shared:linkDebugFrameworkIosFat
