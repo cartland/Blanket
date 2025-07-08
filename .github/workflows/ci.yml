@@ -49,7 +49,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
       - name: Build Android App
-        run: ./gradlew :composeApp:assembleDebug
+        run: ./scripts/build-android.sh
       - name: Upload Android APKs and AABs
         uses: actions/upload-artifact@v4
         with:
@@ -105,7 +105,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
       - name: Build Desktop App
-        run: ./gradlew :composeApp:packageReleaseUberJarForCurrentOS
+        run: ./scripts/build-desktop.sh
       - name: Upload Desktop JAR
         uses: actions/upload-artifact@v4
         with:
@@ -132,7 +132,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
       - name: Build WasmJS
-        run: ./gradlew :composeApp:wasmJsBrowserProductionWebpack
+        run: ./scripts/build-wasm.sh
       - name: Upload WasmJS Artifact
         uses: actions/upload-artifact@v4
         with:
