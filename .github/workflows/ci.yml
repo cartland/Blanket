@@ -76,7 +76,7 @@ jobs:
           scheme: iosApp
           platform: iOS
           action: build
-          derived-data-path: iosApp/build
+          derived-data-path: build
           working-directory: iosApp
 
       - name: Upload iOS App
