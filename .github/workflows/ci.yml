@@ -77,13 +77,13 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/libs.versions.toml') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
-      - name: Build iOS Framework
+      - name: Build iOS App
         run: ./scripts/build-ios.sh
-      - name: Upload iOS Debug XCFramework
+      - name: Upload iOS App
         uses: actions/upload-artifact@v4
         with:
-          name: blanket-ios-xcframework-debug
-          path: shared/build/XCFrameworks/debug/shared.xcframework
+          name: blanket-ios-app
+          path: build/ios/
 
   build_desktop:
     needs: lint_and_test
