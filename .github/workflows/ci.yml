@@ -74,16 +74,16 @@ jobs:
         with:
           xcode: ^16
           scheme: iosApp
-          platform: iOS # Changed from 'iOS Simulator' to 'iOS'
+          platform: iOS
           action: build
-          derived_data_path: iosApp/build # Explicitly set DerivedData path
-          working-directory: iosApp # Added working directory
+          derived_data_path: iosApp/build
+          working-directory: iosApp
 
       - name: Upload iOS App
         uses: actions/upload-artifact@v4
         with:
           name: blanket-ios-app
-          path: iosApp/build/ # This path should now be correct
+          path: iosApp/build/Build/Products/Debug-iphonesimulator/ # Adjusted path
 
   build_desktop:
     needs: lint_and_test
