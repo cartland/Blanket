@@ -70,7 +70,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build iOS app
-        uses: cartland/xcodebuild@v3
+        uses: cartland/xcodebuild@v3.6.0
         with:
           xcode: ^16
           scheme: iosApp
