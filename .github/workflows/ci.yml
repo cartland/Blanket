@@ -74,20 +74,16 @@ jobs:
         with:
           xcode: ^16
           scheme: iosApp
-          platform: iOS Simulator
+          platform: iOS # Changed from 'iOS Simulator' to 'iOS'
           action: build
+          derived_data_path: iosApp/build # Explicitly set DerivedData path
+          working-directory: iosApp # Added working directory
 
       - name: Upload iOS App
         uses: actions/upload-artifact@v4
         with:
           name: blanket-ios-app
-          # The mxcl/xcodebuild action outputs to DerivedData by default.
-          # The path needs to be adjusted if we want to upload the .app bundle or other specific artifacts.
-          # For now, let's assume the default output location is acceptable or will be refined.
-          # A common path for the app bundle would be something like:
-          # DerivedData/iosApp/Build/Products/Debug-iphonesimulator/iosApp.app
-          # For simplicity, we'll keep the original path for now and adjust if the build output location differs significantly.
-          path: iosApp/build/ # This might need adjustment based on actual output of mxcl/xcodebuild
+          path: iosApp/build/ # This path should now be correct
 
   build_desktop:
     needs: lint_and_test
