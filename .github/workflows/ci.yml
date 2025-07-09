@@ -87,7 +87,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: blanket-wasm-dist
-          path: composeApp/build/dist/wasmJs/production/
+          path: composeApp/build/dist/wasmJs/productionExecutable/
 
   build_server:
     needs: lint_and_test
