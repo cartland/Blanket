@@ -72,8 +72,8 @@ jobs:
       - name: Upload Desktop JAR
         uses: actions/upload-artifact@v4
         with:
-          name: blanket-desktop-jar
-          path: composeApp/build/compose/jars/
+          name: blanket-desktop-dist
+          path: composeApp/build/compose/binaries/main/app
 
   build_wasm:
     needs: lint_and_test
