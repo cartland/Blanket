@@ -73,7 +73,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: blanket-desktop-dist
-          path: composeApp/build/compose/binaries/main/app
+          path: composeApp/build/compose/binaries/main
 
   build_wasm:
     needs: lint_and_test
