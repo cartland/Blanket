@@ -36,6 +36,7 @@ include(":composeApp")
 include(":server")
 include(":shared") // Legacy, to be removed or repurposed
 include(":domain")
+include(":usecase")
 include(":data")
 include(":ui-core")
 include(":ui-feature")
