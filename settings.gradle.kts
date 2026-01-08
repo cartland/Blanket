@@ -33,7 +33,10 @@ plugins {
 }
 
 include(":composeApp")
-include(":server")
+include(":server:domain")
+include(":server:data")
+include(":server:app")
+include(":networking")
 // include(":shared") // Legacy, to be removed or repurposed
 include(":domain")
 include(":usecase")
